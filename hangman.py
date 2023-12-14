@@ -12,7 +12,8 @@ def guess_Times():
         return num
     except ValueError:
         print("Wrong input, Enter a numeric value and try again.")
-        guess_Times()
+        num = guess_Times()
+        return num
 num = guess_Times()
 # for x in word:
 #     print('*', end=' ')

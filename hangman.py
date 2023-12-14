@@ -6,7 +6,14 @@ trigger = 0
 wordGuess = '*' * len(word)
 wordGuessList = list(wordGuess)
 print('Welcome to play Hangman')
-num = int(input('Enter number of choices in which you will guess : '))
+def guess_Times():
+    try:
+        num = int(input('Enter number of choices in which you will guess : '))
+        return num
+    except ValueError:
+        print("Wrong input, Enter a numeric value and try again.")
+        guess_Times()
+num = guess_Times()
 # for x in word:
 #     print('*', end=' ')
 print('\n You have to guess a word that has ' + str(len(word)) + ' letters : ')

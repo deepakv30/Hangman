@@ -1,54 +1,75 @@
 import random
 
-Words = ('python', 'david', 'honor', 'room')
-word = random.choice(Words)
-trigger = 0
-wordGuess = '*' * len(word)
-wordGuessList = list(wordGuess)
-print('Welcome to play Hangman')
-def guess_Times():
-    try:
-        num = int(input('Enter number of choices in which you will guess : '))
-        return num
-    except ValueError:
-        print("Wrong input, Enter a numeric value and try again.")
-        num = guess_Times()
-        return num
-num = guess_Times()
-# for x in word:
-#     print('*', end=' ')
-print('\n You have to guess a word that has ' + str(len(word)) + ' letters : ')
-print(wordGuessList)
-while num > 0:
-    guess = input(str(num) + ' guess remaining : ')
-    for x in word:
-        if guess == x:
-            i = word.index(x)
-            trigger = 1
-            if wordGuessList[i] == '*':
-                wordGuessList[i] = x
-            else:
-                continue
-        else:
+
+def get_word_list():
+    """Return a list of words for the game."""
+    return [
+        "python", "hangman", "developer", "algorithm", "github",
+        "computer", "keyboard", "monitor", "program", "function",
+        "variable", "constant", "loop", "condition", "debug",
+        "repository", "pullrequest", "commit", "branch", "merge"
+    ]
+
+
+def display_word(word, guessed_letters):
+    """Return the current display of the word with guessed letters revealed."""
+    return "".join(letter if letter in guessed_letters else "*" for letter in word)
+
+
+def get_valid_guess(guessed_letters):
+    """Prompt for a valid single lowercase letter guess."""
+    while True:
+        guess = input("Enter your guess (single lowercase letter): ").strip().lower()
+        if len(guess) != 1:
+            print("Please enter exactly one letter.")
             continue
-    print(wordGuessList)
-    if trigger == 1:
-        if "".join(wordGuessList) == word:
-            print('You Win the game!')
-            break
-        trigger = 0
-    else:
-        num = num-1
-
-if "".join(wordGuessList) != word:
-    print('You lose the game! Try Again')
+        if not guess.isalpha():
+            print("Please enter a letter (a-z).")
+            continue
+        if guess in guessed_letters:
+            print(f"You already guessed '{guess}'. Try a different letter.")
+            continue
+        return guess
 
 
+def play_hangman():
+    """Main function to play the Hangman game."""
+    print("Welcome to Hangman!")
+    print("Guess the hidden word letter by letter.\n")
+
+    words = get_word_list()
+    word = random.choice(words).lower()
+    guessed_letters = set()
+    remaining_guesses = 8  # Standard number of attempts for a good challenge
+
+    print(f"The word has {len(word)} letters.")
+    print(display_word(word, guessed_letters))
+    print(f"You have {remaining_guesses} guesses remaining.\n")
+
+    while remaining_guesses > 0:
+        guess = get_valid_guess(guessed_letters)
+        guessed_letters.add(guess)
+
+        if guess in word:
+            print(f"Good guess! '{guess}' is in the word.")
+        else:
+            remaining_guesses -= 1
+            print(f"Sorry, '{guess}' is not in the word. You have {remaining_guesses} guesses left.")
+
+        current_display = display_word(word, guessed_letters)
+        print(current_display)
+
+        if current_display == word:
+            print("\n🎉 Congratulations! You guessed the word correctly!")
+            print(f"The word was: {word}")
+            return
+
+        print(f"Guessed letters so far: {', '.join(sorted(guessed_letters))}\n")
+
+    # If loop ends without winning
+    print("\n😢 Game Over! You ran out of guesses.")
+    print(f"The word was: {word}")
 
 
-
-
-
-
-
-
+if __name__ == "__main__":
+    play_hangman()

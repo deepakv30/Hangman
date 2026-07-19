@@ -20,6 +20,62 @@ This repository contains a beginner-friendly command-line Hangman game. Players 
 3. Guess one letter at a time (lowercase recommended).
 4. Try to reveal the full word before running out of attempts!
 
+## Example Gameplay
+
+**Winning game:**
+```text
+Welcome to Hangman!
+Guess the hidden word letter by letter.
+The word has 8 letters.
+********
+You have 8 guesses remaining.
+
+Enter your guess (single lowercase letter): e
+Sorry, 'e' is not in the word. You have 7 guesses left.
+********
+Guessed letters so far: e
+
+Enter your guess (single lowercase letter): a
+Good guess! 'a' is in the word.
+*****a**
+Guessed letters so far: a, e
+
+...
+
+Enter your guess (single lowercase letter): s
+Good guess! 's' is in the word.
+constant
+
+🎉 Congratulations! You guessed the word correctly!
+The word was: constant
+```
+
+**Losing game (also shows duplicate-letter and repeat-guess handling):**
+```text
+Welcome to Hangman!
+Guess the hidden word letter by letter.
+The word has 8 letters.
+********
+You have 8 guesses remaining.
+
+Enter your guess (single lowercase letter): a
+Good guess! 'a' is in the word.
+*a**a***
+Guessed letters so far: a
+
+Enter your guess (single lowercase letter): a
+You already guessed 'a'. Try a different letter.
+
+...
+
+Enter your guess (single lowercase letter): w
+Sorry, 'w' is not in the word. You have 0 guesses left.
+*a**ab*e
+
+😢 Game Over! You ran out of guesses.
+The word was: variable
+```
+
 ## Installation & Running
 ```bash
 git clone https://github.com/deepakv30/Hangman.git
@@ -45,11 +101,11 @@ See the main GitHub Issue for the full prioritized list, progress tracking, and 
 - [x] Add comprehensive README
 - [x] Add MIT LICENSE
 - [x] Add Python .gitignore
-- [ ] Fix duplicate letter revelation bug properly
-- [ ] Improve input validation and UX
-- [ ] Add unit tests with pytest
-- [ ] Set up GitHub Actions CI
-- [ ] Expand word list (from file or external source)
+- [x] Fix duplicate letter revelation bug properly
+- [x] Improve input validation and UX
+- [x] Add unit tests with pytest
+- [x] Set up GitHub Actions CI
+- [x] Expand word list (from file or external source)
 - [ ] Add ASCII hangman art and difficulty levels
 - [ ] Modernize code style (f-strings, better structure, docstrings)
 - [ ] Clean up dangling submodule entry

@@ -1,5 +1,71 @@
 import random
 
+HANGMAN_STAGES = [
+    """
+      +---+
+      |   |
+          |
+          |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+          |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+      |   |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|   |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|\  |
+          |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|\  |
+     /    |
+          |
+    =========
+    """,
+    """
+      +---+
+      |   |
+      O   |
+     /|\  |
+     / \  |
+          |
+    =========
+    """
+]
+
 
 def get_word_list():
     """Return a list of words for the game."""
@@ -42,28 +108,30 @@ def get_valid_guess(guessed_letters):
 
 
 def play_hangman():
-    """Main function to play the Hangman game."""
+    """Main function to play the Hangman game with ASCII art."""
     print("Welcome to Hangman!")
     print("Guess the hidden word letter by letter.\n")
 
     words = get_word_list()
     word = random.choice(words).lower()
     guessed_letters = set()
-    remaining_guesses = 8  # Standard number of attempts for a good challenge
+    wrong_guesses = 0
+    max_guesses = 6  # Matches ASCII stages
 
     print(f"The word has {len(word)} letters.")
     print(display_word(word, guessed_letters))
-    print(f"You have {remaining_guesses} guesses remaining.\n")
+    print(f"You have {max_guesses} guesses remaining.\n")
 
-    while remaining_guesses > 0:
+    while wrong_guesses < max_guesses:
         guess = get_valid_guess(guessed_letters)
         guessed_letters.add(guess)
 
         if guess in word:
             print(f"Good guess! '{guess}' is in the word.")
         else:
-            remaining_guesses -= 1
-            print(f"Sorry, '{guess}' is not in the word. You have {remaining_guesses} guesses left.")
+            wrong_guesses += 1
+            print(f"Sorry, '{guess}' is not in the word.")
+            print(HANGMAN_STAGES[wrong_guesses])
 
         current_display = display_word(word, guessed_letters)
         print(current_display)
@@ -75,7 +143,8 @@ def play_hangman():
 
         print(f"Guessed letters so far: {', '.join(sorted(guessed_letters))}\n")
 
-    # If loop ends without winning
+    # Game over
+    print(HANGMAN_STAGES[-1])
     print("\n😢 Game Over! You ran out of guesses.")
     print(f"The word was: {word}")
 

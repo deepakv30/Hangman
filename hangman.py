@@ -7,7 +7,16 @@ def get_word_list():
         "python", "hangman", "developer", "algorithm", "github",
         "computer", "keyboard", "monitor", "program", "function",
         "variable", "constant", "loop", "condition", "debug",
-        "repository", "pullrequest", "commit", "branch", "merge"
+        "repository", "commit", "branch", "merge",
+        "apple", "river", "window", "pencil", "garden", "mountain",
+        "shadow", "music", "camera", "winter", "summer", "farmer",
+        "baker", "doctor", "teacher", "student", "friend", "family",
+        "village", "city", "street", "bridge", "kitchen", "table",
+        "chair", "blanket", "ocean", "island", "tree", "flower",
+        "bird", "animal", "tiger", "weather", "cloud", "thunder",
+        "rain", "snow", "light", "dark", "strong", "quick",
+        "happy", "brave", "honest", "simple", "clever", "careful",
+        "beautiful", "balance"
     ]
 
 

@@ -1,7 +1,7 @@
 import random
 
 HANGMAN_STAGES = [
-    """
+    r"""
       +---+
       |   |
           |
@@ -10,25 +10,25 @@ HANGMAN_STAGES = [
           |
     =========
     """,
-    """
-      +---+
-      |   |
-      O   |
-          |
-          |
-          |
-    =========
-    """,
-    """
+    r"""
       +---+
       |   |
       O   |
+          |
+          |
+          |
+    =========
+    """,
+    r"""
+      +---+
+      |   |
+      O   |
       |   |
           |
           |
     =========
     """,
-    """
+    r"""
       +---+
       |   |
       O   |
@@ -37,7 +37,7 @@ HANGMAN_STAGES = [
           |
     =========
     """,
-    """
+    r"""
       +---+
       |   |
       O   |
@@ -46,7 +46,7 @@ HANGMAN_STAGES = [
           |
     =========
     """,
-    """
+    r"""
       +---+
       |   |
       O   |
@@ -55,7 +55,7 @@ HANGMAN_STAGES = [
           |
     =========
     """,
-    """
+    r"""
       +---+
       |   |
       O   |
@@ -119,6 +119,7 @@ def play_hangman():
     max_guesses = 6  # Matches ASCII stages
 
     print(f"The word has {len(word)} letters.")
+    print(HANGMAN_STAGES[0])
     print(display_word(word, guessed_letters))
     print(f"You have {max_guesses} guesses remaining.\n")
 
@@ -141,10 +142,11 @@ def play_hangman():
             print(f"The word was: {word}")
             return
 
-        print(f"Guessed letters so far: {', '.join(sorted(guessed_letters))}\n")
+        remaining = max_guesses - wrong_guesses
+        guess_word = "guess" if remaining == 1 else "guesses"
+        print(f"Guessed letters so far: {', '.join(sorted(guessed_letters))}")
+        print(f"You have {remaining} {guess_word} remaining.\n")
 
-    # Game over
-    print(HANGMAN_STAGES[-1])
     print("\n😢 Game Over! You ran out of guesses.")
     print(f"The word was: {word}")
 

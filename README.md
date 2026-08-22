@@ -1,32 +1,38 @@
 # Hangman CLI Game
 
 [![CI](https://github.com/deepakv30/Hangman/actions/workflows/ci.yml/badge.svg)](https://github.com/deepakv30/Hangman/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
 
-**A simple, dependency-free implementation of the classic Hangman word-guessing game in Python.**
+**Clean, tested, and CI-enabled Python Hangman CLI game with ASCII art, input validation, and modern best practices — portfolio project by a DevSecOps engineer.**
 
 ## Overview
-This repository contains a beginner-friendly command-line Hangman game. Players guess letters to reveal a hidden word before the hangman drawing is complete.
 
-**Note:** This is an early Python project (2019) by a DevSecOps engineer. It is being actively improved for better code quality, documentation, and maintainability as of 2026.
+A beginner-friendly yet professionally structured command-line Hangman game written in pure Python. Players guess letters to reveal a hidden word before the hangman drawing is complete.
+
+This started as an early 2019 learning project and has been iteratively modernized in 2026 with tests, CI, documentation, input validation, ASCII stages, and clean code practices suitable for a developer portfolio.
 
 ## Features
-- Random word selection from a built-in list
-- 6 wrong guesses, with ASCII hangman stages after each miss
-- Duplicate letters are revealed together
-- Input validation (one letter, already-guessed, non-letters)
-- Remaining-guess count after every turn
-- Clear win/lose feedback
-- Pure Python — no external dependencies
+
+- Random word selection from a curated built-in list (~60 words)
+- 6 wrong guesses with progressive ASCII hangman stages
+- Correct handling of duplicate letters (all occurrences revealed at once)
+- Robust input validation (single letter, already-guessed, non-letters, case-insensitive)
+- Remaining-guess counter after every turn
+- Clear win / lose feedback with emoji
+- Zero external runtime dependencies
+- Fully tested with `pytest` + GitHub Actions CI (flake8 + pytest)
 
 ## How to Play
+
 1. Clone the repository and run the script.
-2. Guess one letter at a time. Uppercase is accepted and normalized.
-3. A correct guess reveals every matching letter. A miss draws the next hangman stage.
+2. Guess one letter at a time (uppercase is accepted and normalized).
+3. A correct guess reveals every matching letter. A miss advances the hangman drawing.
 4. Reveal the full word before 6 wrong guesses.
 
 ## Example Gameplay
 
-**Winning game:**
+### Winning game
 ```text
 Welcome to Hangman!
 Guess the hidden word letter by letter.
@@ -75,7 +81,7 @@ constant
 The word was: constant
 ```
 
-**Losing game (also shows duplicate-letter and repeat-guess handling):**
+### Losing game (shows duplicate-letter + already-guessed handling)
 ```text
 Welcome to Hangman!
 Guess the hidden word letter by letter.
@@ -123,14 +129,17 @@ You have 0 guesses remaining.
 The word was: variable
 ```
 
+> **Note:** Text-based examples are included above. A short terminal GIF or screenshot would further improve the README — contributions welcome!
+
 ## Installation & Running
+
 ```bash
 git clone https://github.com/deepakv30/Hangman.git
 cd Hangman
 python hangman.py
 ```
 
-Run the tests (pytest is a dev dependency, not required to play):
+Run the tests (pytest is a development dependency only):
 
 ```bash
 pip install pytest
@@ -138,47 +147,62 @@ pytest tests/ -v
 ```
 
 ## Tech Stack
-- Python 3.x (standard library only: `random`)
-- pytest and flake8 in CI
+
+- Python 3.x (standard library only at runtime: `random`)
+- pytest + flake8 in CI
 
 ## Project Structure
-```
+
+```text
 Hangman/
-├── hangman.py          # Main game logic
+├── hangman.py                 # Main game logic + ASCII stages
 ├── tests/
-│   └── test_hangman.py
-├── .github/workflows/ci.yml
+│   └── test_hangman.py        # Unit tests
+├── .github/
+│   ├── workflows/ci.yml       # GitHub Actions (lint + test)
+│   ├── ISSUE_TEMPLATE/        # Bug & feature templates
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── README.md
-├── LICENSE
-└── .gitignore
+├── LICENSE                    # MIT
+├── .gitignore
+└── pytest.ini
 ```
+
+## Discoverability (Recommended Topics)
+
+For better GitHub search and recommendation visibility, consider adding these topics in **Settings → General → Topics**:
+
+`python` `hangman` `cli-game` `pytest` `github-actions` `beginner-project` `portfolio` `devops`
+
+Also update the repository short description to match the tagline above.
 
 ## Future Improvements / Roadmap
-See the main GitHub Issue for the full prioritized list, progress tracking, and discussion.
 
-- [x] Add comprehensive README
-- [x] Add MIT LICENSE
-- [x] Add Python .gitignore
-- [x] Fix duplicate letter revelation bug properly
-- [x] Improve input validation and UX
-- [x] Add unit tests with pytest
-- [x] Set up GitHub Actions CI
-- [x] Expand word list
-- [x] Add ASCII hangman art
-- [x] Clean up dangling submodule entry
-- [ ] Add difficulty levels
-- [ ] Load words from a file or external source
+Most core improvements from the original review are complete.
+
+**Optional next steps:**
+- [ ] Add difficulty levels (Easy / Medium / Hard)
+- [ ] Load words from an external file (`words.txt`) with fallback to built-in list
+- [ ] Short terminal GIF or screenshot in the README
+- [ ] Optional “Play again?” loop
+- [ ] Package as an installable CLI tool
 
 ## Contributing
-Contributions are welcome! Please:
-1. Comment on or reference the main improvement issue first.
-2. Fork the repo and create a feature branch from `main`.
-3. Submit a Pull Request.
+
+Contributions are welcome!
+
+1. Fork the repository.
+2. Create a feature branch from `main`.
+3. Make your changes and add tests if applicable.
+4. Ensure CI passes (`pytest` + flake8).
+5. Open a Pull Request using the provided template.
 
 ## License
+
 MIT License — see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-Originally created as a simple Python learning project in 2019. Being modernized in 2026 as part of ongoing professional development and portfolio improvement.
 
-**This work addresses recommendations from a structured Senior GitHub Profile Strategist review.**
+Originally created as a simple Python learning project in 2019. Iteratively modernized in 2026 as part of ongoing professional development and portfolio improvement.
+
+This repository demonstrates practical application of documentation, testing, CI, and clean code practices recommended for developer portfolios.

@@ -3,9 +3,6 @@ from hangman import (
     display_word,
     get_valid_guess,
     DIFFICULTY_CONFIG,
-    EASY_WORDS,
-    MEDIUM_WORDS,
-    HARD_WORDS,
 )
 
 
@@ -24,7 +21,7 @@ def test_get_word_list_all_lowercase_alpha():
 def test_get_word_list_easy():
     words = get_word_list("easy")
     assert len(words) > 0
-    # When words.txt is present it is preferred; otherwise EASY_WORDS is used.
+    # When words.txt is present it is preferred; otherwise the built-in list is used.
     # Both are valid.
     assert all(w.isalpha() and w == w.lower() for w in words)
 

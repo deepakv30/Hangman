@@ -15,13 +15,14 @@ This started as an early 2019 learning project and has been iteratively moderniz
 ## Features
 
 - **Difficulty levels**: Easy (8 guesses), Medium (6), Hard (5)
+- **Play again?** loop after win or lose
 - Random word selection from a curated built-in list or optional `words.txt`
 - Progressive ASCII hangman stages
 - Correct handling of duplicate letters (all occurrences revealed at once)
 - Robust input validation (single letter, already-guessed, non-letters, case-insensitive)
 - Remaining-guess counter after every turn
 - Clear win / lose feedback with emoji
-- Zero external runtime dependencies
+- **Optional colored output** via `colorama` (fully optional — zero hard dependencies)
 - Fully typed helpers + comprehensive `pytest` suite
 - GitHub Actions CI (flake8 + pytest)
 
@@ -32,6 +33,7 @@ This started as an early 2019 learning project and has been iteratively moderniz
 3. Guess one letter at a time (uppercase is accepted and normalized).
 4. A correct guess reveals every matching letter. A miss advances the hangman drawing.
 5. Reveal the full word before you run out of guesses.
+6. After the round, choose whether to play again.
 
 ## Example Gameplay
 
@@ -70,6 +72,9 @@ You have 6 guesses remaining.
 
 🎉 Congratulations! You guessed the word correctly!
 The word was: constant
+
+Play again? (y/n) [default: n]: n
+Thanks for playing! Goodbye.
 ```
 
 ## Installation & Running
@@ -79,6 +84,16 @@ git clone https://github.com/deepakv30/Hangman.git
 cd Hangman
 python hangman.py
 ```
+
+### Optional: Colored output
+
+For colored terminal messages (green for correct, red for wrong, etc.):
+
+```bash
+pip install colorama
+```
+
+The game works perfectly without it — colors are completely optional.
 
 ### Optional: Custom word list
 
@@ -94,6 +109,7 @@ pytest tests/ -v
 ## Tech Stack
 
 - Python 3.x (standard library only at runtime)
+- Optional: `colorama` for colored output
 - Type hints throughout
 - pytest + flake8 in CI
 
@@ -131,7 +147,6 @@ Most recommended improvements are now complete.
 
 **Optional next steps:**
 - [ ] Short terminal GIF or screenshot in the README
-- [ ] Optional “Play again?” loop
 - [ ] Package as an installable CLI tool
 
 ## Contributing

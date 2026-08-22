@@ -1,4 +1,12 @@
-from hangman import get_word_list, display_word, get_valid_guess
+from hangman import (
+    get_word_list,
+    display_word,
+    get_valid_guess,
+    DIFFICULTY_CONFIG,
+    EASY_WORDS,
+    MEDIUM_WORDS,
+    HARD_WORDS,
+)
 
 
 # --- get_word_list ---
@@ -11,6 +19,36 @@ def test_get_word_list_all_lowercase_alpha():
     for word in get_word_list():
         assert word == word.lower()
         assert word.isalpha()
+
+
+def test_get_word_list_easy():
+    words = get_word_list("easy")
+    assert len(words) > 0
+    # When words.txt is present it is preferred; otherwise EASY_WORDS is used.
+    # Both are valid.
+    assert all(w.isalpha() and w == w.lower() for w in words)
+
+
+def test_get_word_list_medium():
+    words = get_word_list("medium")
+    assert len(words) > 0
+
+
+def test_get_word_list_hard():
+    words = get_word_list("hard")
+    assert len(words) > 0
+
+
+def test_get_word_list_invalid_difficulty_falls_back_to_medium():
+    words = get_word_list("invalid")
+    assert len(words) > 0
+
+
+def test_difficulty_config_has_expected_keys():
+    assert set(DIFFICULTY_CONFIG.keys()) == {"easy", "medium", "hard"}
+    assert DIFFICULTY_CONFIG["easy"]["max_guesses"] == 8
+    assert DIFFICULTY_CONFIG["medium"]["max_guesses"] == 6
+    assert DIFFICULTY_CONFIG["hard"]["max_guesses"] == 5
 
 
 # --- display_word ---

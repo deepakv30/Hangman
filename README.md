@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/deepakv30/Hangman/actions/workflows/ci.yml/badge.svg)](https://github.com/deepakv30/Hangman/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/)
 
 **Clean, tested, and CI-enabled Python Hangman CLI game with ASCII art, input validation, difficulty levels, and modern best practices — portfolio project by a DevSecOps engineer.**
 
@@ -99,19 +99,20 @@ The game works perfectly without it — colors are completely optional.
 
 Create a `words.txt` file in the project root (one word per line). The game will prefer these words when the file is present and falls back to the built-in lists otherwise. A sample `words.txt` is included.
 
-Run the tests (pytest is a development dependency only):
+Run lint and tests (development dependencies only — the game itself stays zero-dep):
 
 ```bash
-pip install pytest
+pip install -r requirements-dev.txt
+flake8 . --max-line-length=100
 pytest tests/ -v
 ```
 
 ## Tech Stack
 
-- Python 3.x (standard library only at runtime)
+- Python 3.11 / 3.12 (standard library only at runtime)
 - Optional: `colorama` for colored output
 - Type hints throughout
-- pytest + flake8 in CI
+- pytest + flake8 in CI via pinned `requirements-dev.txt`
 
 ## Project Structure
 
@@ -122,9 +123,10 @@ Hangman/
 ├── tests/
 │   └── test_hangman.py        # Unit tests
 ├── .github/
-│   ├── workflows/ci.yml       # GitHub Actions (lint + test)
+│   ├── workflows/ci.yml       # GitHub Actions (Python 3.11/3.12 lint + test)
 │   ├── ISSUE_TEMPLATE/        # Bug & feature templates
 │   └── PULL_REQUEST_TEMPLATE.md
+├── requirements-dev.txt       # Pinned flake8 + pytest (dev only)
 ├── README.md
 ├── CONTRIBUTING.md
 ├── SECURITY.md

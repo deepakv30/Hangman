@@ -18,8 +18,8 @@ Thank you for your interest in contributing! This project welcomes improvements 
 ## Development Setup
 
 ```bash
-# Install development dependencies
-pip install pytest flake8
+# Install pinned development dependencies (runtime stays stdlib-only)
+pip install -r requirements-dev.txt
 
 # Run the game
 python hangman.py
@@ -30,6 +30,8 @@ pytest tests/ -v
 # Lint
 flake8 . --max-line-length=100
 ```
+
+CI runs the same flake8 + pytest commands on Python 3.11 and 3.12.
 
 ## Making Changes
 

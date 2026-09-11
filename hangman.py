@@ -2,6 +2,22 @@ import random
 from pathlib import Path
 from typing import List, Set
 
+# Optional color support — keeps the game fully dependency-free.
+# Install with: pip install colorama
+try:
+    from colorama import Fore, Style, init as colorama_init
+
+    colorama_init(autoreset=True)
+    GREEN = Fore.GREEN
+    RED = Fore.RED
+    YELLOW = Fore.YELLOW
+    CYAN = Fore.CYAN
+    RESET = Style.RESET_ALL
+    COLORS_ENABLED = True
+except ImportError:
+    GREEN = RED = YELLOW = CYAN = RESET = ""
+    COLORS_ENABLED = False
+
 HANGMAN_STAGES = [
     r"""
       +---+
@@ -165,8 +181,8 @@ def select_difficulty() -> str:
 
 
 def play_hangman(difficulty: str | None = None) -> None:
-    """Main function to play the Hangman game with ASCII art."""
-    print("Welcome to Hangman!")
+    """Main function to play one round of the Hangman game with ASCII art."""
+    print(f"{CYAN}Welcome to Hangman!{RESET}")
     print("Guess the hidden word letter by letter.\n")
 
     if difficulty is None:
@@ -190,10 +206,10 @@ def play_hangman(difficulty: str | None = None) -> None:
         guessed_letters.add(guess)
 
         if guess in word:
-            print(f"Good guess! '{guess}' is in the word.")
+            print(f"{GREEN}Good guess! '{guess}' is in the word.{RESET}")
         else:
             wrong_guesses += 1
-            print(f"Sorry, '{guess}' is not in the word.")
+            print(f"{RED}Sorry, '{guess}' is not in the word.{RESET}")
             # Clamp index so we never go out of range
             stage_index = min(wrong_guesses, len(HANGMAN_STAGES) - 1)
             print(HANGMAN_STAGES[stage_index])
@@ -202,7 +218,7 @@ def play_hangman(difficulty: str | None = None) -> None:
         print(current_display)
 
         if current_display == word:
-            print("\n🎉 Congratulations! You guessed the word correctly!")
+            print(f"\n{GREEN}🎉 Congratulations! You guessed the word correctly!{RESET}")
             print(f"The word was: {word}")
             return
 
@@ -211,9 +227,20 @@ def play_hangman(difficulty: str | None = None) -> None:
         print(f"Guessed letters so far: {', '.join(sorted(guessed_letters))}")
         print(f"You have {remaining} {guess_word} remaining.\n")
 
-    print("\n😢 Game Over! You ran out of guesses.")
+    print(f"\n{RED}😢 Game Over! You ran out of guesses.{RESET}")
     print(f"The word was: {word}")
 
 
+def main() -> None:
+    """Entry point with optional play-again loop."""
+    while True:
+        play_hangman()
+        again = input(f"\n{YELLOW}Play again? (y/n) [default: n]: {RESET}").strip().lower()
+        if again not in ("y", "yes"):
+            print("Thanks for playing! Goodbye.")
+            break
+        print()  # blank line between rounds
+
+
 if __name__ == "__main__":
-    play_hangman()
+    main()
